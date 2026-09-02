@@ -1,9 +1,12 @@
 import argparse
 from pathlib import Path
-from modules.organizer import organize_files
+from modules.helper import organize_files
+from modules.helper import scan_files
 from rich.panel import Panel
 from rich.console import Console
 
+
+# CLI ARG PARSER
 parser = argparse.ArgumentParser(
     prog="forgesort",
     usage="forgesort [command] [options] <folder>",
@@ -14,14 +17,12 @@ parser = argparse.ArgumentParser(
 parser.add_argument("-o", "--organize", required=True, help="organizes files inside a specified folder", type=Path)
 args = parser.parse_args()
 
-folder_files = [i for i in args.organize.iterdir() if i.is_file()]
+folder_files = scan_files(args.organize)
 
+# RICH CONSOLE
 console = Console()
 
-import time
-
-with console.status("Scanning files..."):
-    time.sleep(5)
+with console.status("Organizing files..."):
     organize_files(folder_files, args.organize)
 
 config = (
