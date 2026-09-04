@@ -58,10 +58,10 @@ elif args.checkdup:
         )
     )
     
-    config_files = "\n".join(
-        file.name  
-        for group in duplicate_files
-        for file in group
+    config_files = "\n\n".join(
+        f"File Group {index}\n"
+        + "\n".join(file.name for file in group)
+        for index, group in enumerate(duplicate_files, start=1)
     )
     
     console.print(

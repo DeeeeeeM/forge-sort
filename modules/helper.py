@@ -49,4 +49,4 @@ def check_duplicate(folder_files : list):
                 if len(duplicate_groups) > 1:
                     duplicate_items.append(duplicate_groups)
     
-    return duplicate_items          
+    return duplicate_items         
